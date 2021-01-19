@@ -1,0 +1,12 @@
+.App {
+    margin-top: 15px;
+}
+
+.App .navbar-brand {
+    font-weight: bold;
+}
+
+#logout{
+    color:red;
+    font-weight: bold;
+}

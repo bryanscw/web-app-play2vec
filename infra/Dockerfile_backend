@@ -1,0 +1,16 @@
+FROM tensorflow/tensorflow:1.15.2
+
+RUN apt update -y
+RUN DEBIAN_FRONTEND="noninteractive" TZ="Asia" apt -y install tzdata
+RUN apt install python3-tk ghostscript-x -y
+RUN pip3 install -U pip
+RUN pip3 install -U flask flask-cors matplotlib sklearn uwsgi imageio
+
+WORKDIR play2vec
+COPY src src/
+
+WORKDIR app/flask
+COPY app/flask .
+EXPOSE 8080
+
+CMD ["uwsgi", "app.ini"]

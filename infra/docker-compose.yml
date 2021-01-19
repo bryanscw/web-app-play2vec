@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+        
+    backend:
+        build:
+            context: ../
+            dockerfile: infra/Dockerfile_backend
+        container_name: play2vec-be
+        ports: 
+          - "8080:8080"
+        
+    frontend:
+        build:
+            context: ../
+            dockerfile: infra/Dockerfile_frontend
+            args:
+              - API_ADDR=127.0.0.1
+        stdin_open: true
+        container_name: play2vec-fe
+        depends_on:
+          - backend
+        ports: 
+          - "3000:3000"
+          - "80:80"
